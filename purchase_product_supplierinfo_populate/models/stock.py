@@ -2,7 +2,7 @@
 # © 2016 Sergio Teruel <sergio.teruel@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, api
+from openerp import api, models
 
 
 class SotckMove(models.Model):
@@ -17,21 +17,25 @@ class SotckMove(models.Model):
         }
         return pricelist_values
 
+    def _prepare_supplierinfo_values(self):
+        values = {
+            'name': self.picking_id.partner_id.id,
+            'product_name': self.product_id.name,
+            'min_qty': 1,
+            'product_tmpl_id': self.product_id.product_tmpl_id.id,
+            'pricelist_ids': [(0, 0, self._prepare_price_list_values())]
+        }
+        return values
+
     def create_supplierinfo(self):
         if self.picking_id.partner_id and self.product_id:
-            values = {
-                'name': self.picking_id.partner_id.id,
-                'product_name': self.product_id.name,
-                'min_qty': 1,
-                'product_tmpl_id': self.product_id.product_tmpl_id.id,
-                'pricelist_ids': [(0, 0, self._prepare_price_list_values())]
-            }
-            self.env['product.supplierinfo'].create(values)
+            self.env['product.supplierinfo'].create(
+                self._prepare_supplierinfo_values())
         return True
 
     def _update_supplierinfo_price(self):
-        if (self.state == 'assigned' and
-                    self.picking_type_id.code == 'incoming'):
+        if (self.state == 'assigned' or self.state == 'done') and \
+                    self.picking_type_id.code == 'incoming':
             supplier_pick = self.picking_id.partner_id
             supplier = self.product_id.product_tmpl_id.seller_ids.filtered(
                 lambda x: x.name == supplier_pick)
