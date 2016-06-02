@@ -5,7 +5,7 @@
 from openerp import api, models
 
 
-class SotckMove(models.Model):
+class StockMove(models.Model):
     _inherit = 'stock.move'
 
     def _prepare_price_list_values(self):
@@ -52,7 +52,7 @@ class SotckMove(models.Model):
 
     @api.multi
     def write(self, vals):
-        res = super(SotckMove, self).write(vals)
+        res = super(StockMove, self).write(vals)
         for move in self:
             move._update_supplierinfo_price()
         return res
