@@ -57,3 +57,15 @@ class TestSupplierInfoPopulate(common.TransactionCase):
         }
         self.purchase_order = self.env['purchase.order.line'].create(
             vals_purchase_line)
+
+        vals_stock = {
+            'name': 'Test 01',
+            'product_id': self.product.id,
+            'product_qty': 1.0,
+            'partner_id': self.supplier.id,
+            'product_uom_qty': 1.0,
+            'location_id': self.supplier.id,
+            'location_dest_id': self.supplier.id,
+            'price_unit': self.supplier.id,
+        }
+        self.stock_move = self.env['stock.move'].create(vals_stock)
