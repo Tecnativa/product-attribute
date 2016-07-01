@@ -23,7 +23,8 @@ class StockMove(models.Model):
             'product_name': self.product_id.name,
             'min_qty': 1,
             'product_tmpl_id': self.product_id.product_tmpl_id.id,
-            'pricelist_ids': [(0, 0, self._prepare_price_list_values())]
+            'pricelist_ids': [(0, 0, self._prepare_price_list_values())],
+            'sequence': 99,
         }
         return values
 
