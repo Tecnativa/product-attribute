@@ -34,6 +34,11 @@ To use this module, you need to:
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/135/8.0
 
+Known issues / Roadmap
+======================
+
+* Same as those for ``base_custom_info``.
+
 Bug Tracker
 ===========
 

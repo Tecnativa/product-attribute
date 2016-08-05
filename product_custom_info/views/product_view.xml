@@ -11,16 +11,42 @@
         <field name="type" position="after">
             <field name="custom_info_template_id"/>
         </field>
-        <xpath expr="//page[@string='Sales']" position="after">
-            <page name="custom-info" string="Custom Info"
-                  attrs="{'invisible': [('custom_info_template_id', '=', False)]}">
-                <field name="custom_info_ids">
-                    <tree editable="bottom">
-                        <field name="property_id"/>
-                        <field name="value"/>
-                        <field name="model" invisible="True"/>
-                    </tree>
-                </field>
+        <xpath expr="//notebook[1]">
+            <page name="custom_info"
+                  string="Custom Information">
+                <group>
+                    <field
+                        name="custom_info_template_id"
+                        options='{"no_quick_create": True}'/>
+                    <field
+                        name="custom_info_ids"
+                        attrs="{'invisible': [('custom_info_template_id', '=', False)]}">
+                        <tree create="0" delete="0">
+                            <field name="property_id"/>
+                            <field name="value"/>
+                        </tree>
+                        <form>
+                            <field name="field_type" invisible="True"/>
+                            <field name="property_id" readonly="True"/>
+                            <field
+                                name="value_str"
+                                attrs="{'invisible': [('field_type', '!=', 'str')]}"/>
+                            <field
+                                name="value_int"
+                                attrs="{'invisible': [('field_type', '!=', 'int')]}"/>
+                            <field
+                                name="value_float"
+                                attrs="{'invisible': [('field_type', '!=', 'float')]}"/>
+                            <field
+                                name="value_bool"
+                                attrs="{'invisible': [('field_type', '!=', 'bool')]}"/>
+                            <field
+                                name="value_id"
+                                widget="selection"
+                                attrs="{'invisible': [('field_type', '!=', 'id')]}"/>
+                        </form>
+                    </field>
+                </group>
             </page>
         </xpath>
     </field>

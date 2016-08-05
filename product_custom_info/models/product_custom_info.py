@@ -8,7 +8,7 @@ from openerp import fields, models
 
 class ProductTemplate(models.Model):
     _name = "product.template"
-    _inherit = ["product.template", "custom.info"]
+    _inherit = [_name, "custom.info"]
 
     custom_info_template_id = fields.Many2one(
         context={"default_model": _name})
