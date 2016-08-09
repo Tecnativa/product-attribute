@@ -22,11 +22,13 @@
                         name="custom_info_ids"
                         attrs="{'invisible': [('custom_info_template_id', '=', False)]}">
                         <tree create="0" delete="0">
+                            <field name="category_name"/>
                             <field name="property_id"/>
                             <field name="value"/>
                         </tree>
                         <form>
                             <field name="field_type" invisible="True"/>
+                            <field name="category_name"/>
                             <field name="property_id" readonly="True"/>
                             <field
                                 name="value_str"
