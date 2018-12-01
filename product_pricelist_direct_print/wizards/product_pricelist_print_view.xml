@@ -99,6 +99,14 @@
     groups="product.group_sale_pricelist"
     view_mode="form" target="new" view_type="form"/>
 
+<act_window id="action_item_pricelist_print"
+    key2="client_print_multi"
+    name="Price List"
+    res_model="product.pricelist.print"
+    src_model="product.pricelist.item"
+    groups="product.group_sale_pricelist"
+    view_mode="form" target="new" view_type="form"/>
+
 <menuitem action="action_pricelist_print" id="menu_product_pricelist_print"
     parent="sale.product_menu_catalog" sequence="200" groups="product.group_sale_pricelist"/>
 

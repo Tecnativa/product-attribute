@@ -80,6 +80,15 @@ class ProductPricelistPrint(models.TransientModel):
             if len(active_ids) == 1:
                 partner = self.env['res.partner'].browse(active_ids[0])
                 res['pricelist_id'] = partner.property_product_pricelist.id
+        elif self.env.context.get('active_model') == 'product.pricelist.item':
+            active_ids = self.env.context.get('active_ids', [])
+            items = self.env['product.pricelist.item'].browse(active_ids)
+            if items[:1].applied_on == '0_product_variant':
+                res['show_variants'] = True
+                res['product_ids'] = [(6, 0, items.mapped('product_id').ids)]
+            else:
+                res['product_tmpl_ids'] = [
+                    (6, 0, items.mapped('product_tmpl_id').ids)]
         return res
 
     @api.multi
