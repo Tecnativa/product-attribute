@@ -83,12 +83,39 @@ class ProductPricelistPrint(models.TransientModel):
         elif self.env.context.get('active_model') == 'product.pricelist.item':
             active_ids = self.env.context.get('active_ids', [])
             items = self.env['product.pricelist.item'].browse(active_ids)
-            if items[:1].applied_on == '0_product_variant':
+            # Set pricelist if all the items belong to the same one
+            if len(items.mapped('pricelist_id')) == 1:
+                res['pricelist_id'] = items[0].pricelist_id.id
+            product_items = items.filtered(
+                lambda x: x.applied_on == '0_product_variant')
+            template_items = items.filtered(
+                lambda x: x.applied_on == '1_product')
+            category_items = items.filtered(
+                lambda x: x.applied_on == '2_product_category')
+            # Convert al pricelist items to their affected variants
+            if product_items:
                 res['show_variants'] = True
-                res['product_ids'] = [(6, 0, items.mapped('product_id').ids)]
-            else:
+                product_ids = product_items.mapped('product_id')
+                product_ids |= template_items.mapped(
+                    'product_tmpl_id.product_variant_ids')
+                product_ids |= product_ids.search([
+                    ('sale_ok', '=', True),
+                    ('categ_id', 'in', category_items.mapped('categ_id').ids)
+                ])
+                res['product_ids'] = [(6, 0, product_ids.ids)]
+            # Convert al pricelist items to their affected templates
+            if template_items and not product_items:
+                product_tmpl_ids = template_items.mapped('product_tmpl_id')
+                product_tmpl_ids |= product_tmpl_ids.search([
+                    ('sale_ok', '=', True),
+                    ('categ_id', 'in', category_items.mapped('categ_id').ids)
+                ])
                 res['product_tmpl_ids'] = [
-                    (6, 0, items.mapped('product_tmpl_id').ids)]
+                    (6, 0, product_tmpl_ids.ids)]
+            # Only category items, we just set the categories
+            if category_items and not product_items and not template_items:
+                res['categ_ids'] = [
+                    (6, 0, category_items.mapped('categ_id').ids)]
         return res
 
     @api.multi
