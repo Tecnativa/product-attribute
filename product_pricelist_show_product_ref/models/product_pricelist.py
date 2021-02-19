@@ -8,7 +8,7 @@ class ProductPricelistItem(models.Model):
     _inherit = "product.pricelist.item"
 
     def _get_pricelist_item_name_price(self):
-        res = super(). _get_pricelist_item_name_price()
+        res = super()._get_pricelist_item_name_price()
         for record in self.filtered("product_id"):
             record.name = record.product_id.display_name
         for record in self.filtered("product_tmpl_id"):
