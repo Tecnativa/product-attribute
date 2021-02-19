@@ -22,7 +22,7 @@ class TestProductPricelistShowProductRef(SavepointCase):
             {"name": "Product Template", "default_code": "DEF"}
         )
         cls.pricelist = cls.pricelist_obj.create(
-            {"name": "Pricelist", "item_ids": False,}
+            {"name": "Pricelist", "item_ids": False}
         )
         # Create pricelist items
         cls.pricelist_item_product_template = cls.pricelist_item_obj.create(
