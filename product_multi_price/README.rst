@@ -14,6 +14,7 @@ Product Multi Price
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fproduct--attribute-lightgray.png?logo=github
+<<<<<<< HEAD
     :target: https://github.com/OCA/product-attribute/tree/13.0/product_multi_price
     :alt: OCA/product-attribute
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
@@ -21,6 +22,15 @@ Product Multi Price
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/135/13.0
+=======
+    :target: https://github.com/OCA/product-attribute/tree/11.0/product_multi_price
+    :alt: OCA/product-attribute
+.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
+    :target: https://translation.odoo-community.org/projects/product-attribute-11-0/product-attribute-11-0-product_multi_price
+    :alt: Translate me on Weblate
+.. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
+    :target: https://runbot.odoo-community.org/runbot/135/11.0
+>>>>>>> [ADD] product_multi_price: New Module
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -39,6 +49,7 @@ Configuration
 To configure multiple prices you need to set multi prices field names first.
 To do so, you need admin permissions. Then go to:
 
+<<<<<<< HEAD
 #. *Settings > Technical > Database Structure > Price Field Names*
 #. Create the multi price fields you need.
 
@@ -48,20 +59,39 @@ one.
 Note: 'Show multi prices' access group must be checked to be able to
 add multiple prices in the product form view.
 
+=======
+#. *Settings > General Settings > Technical > Database Structure >
+   Price Field Names*
+#. Create the multi price fields you need.
+
+If you have multiple companies, you can assign independet field sets for each
+one.
+
+>>>>>>> [ADD] product_multi_price: New Module
 Usage
 =====
 
 To use this module, you need to:
 
 #. Go to the product page.
+<<<<<<< HEAD
 #. In the general tab, there's a list called *Other Prices*.
 #. You can add one for every price name available.
+=======
+#. In the general tab, there's a list called *Prices*.
+#. You can add one for every multiple price field name available.
+>>>>>>> [ADD] product_multi_price: New Module
 
 To base pricelist rules on that fields, in the pricelist:
 
 #. Add a rule and choose *formula* as the computing method.
+<<<<<<< HEAD
 #. In the *Based on* dropdown list, select *Other Price*.
 #. A new list appear: *Other Price Name*. Pick the one you need.
+=======
+#. In the *Based on* dropdown list you can select *Multiple Prices*.
+#. A new list appear: *Multiple Price Field Name*. Pick the one you need.
+>>>>>>> [ADD] product_multi_price: New Module
 #. Configure the formula.
 #. Now the rule is based on that price for the products that have it
    configured. Otherwise, it will return 0.
@@ -79,7 +109,11 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/product-attribute/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
+<<<<<<< HEAD
 `feedback <https://github.com/OCA/product-attribute/issues/new?body=module:%20product_multi_price%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+=======
+`feedback <https://github.com/OCA/product-attribute/issues/new?body=module:%20product_multi_price%0Aversion:%2011.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+>>>>>>> [ADD] product_multi_price: New Module
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -98,7 +132,10 @@ Contributors
 
   * David Vidal
   * Pedro M. Baeza
+<<<<<<< HEAD
   * Ernesto Tejeda
+=======
+>>>>>>> [ADD] product_multi_price: New Module
 
 Maintainers
 ~~~~~~~~~~~
@@ -113,6 +150,10 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+<<<<<<< HEAD
 This module is part of the `OCA/product-attribute <https://github.com/OCA/product-attribute/tree/13.0/product_multi_price>`_ project on GitHub.
+=======
+This module is part of the `OCA/product-attribute <https://github.com/OCA/product-attribute/tree/11.0/product_multi_price>`_ project on GitHub.
+>>>>>>> [ADD] product_multi_price: New Module
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

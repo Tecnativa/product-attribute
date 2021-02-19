@@ -2,4 +2,7 @@
 
   * David Vidal
   * Pedro M. Baeza
+<<<<<<< HEAD
   * Ernesto Tejeda
+=======
+>>>>>>> [ADD] product_multi_price: New Module

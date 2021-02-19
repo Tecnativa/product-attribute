@@ -1,7 +1,18 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
+=======
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo noupdate="1">
+
+>>>>>>> [ADD] product_multi_price: New Module
     <record id="price_1" model="product.multi.price.name">
         <field name="name">price_1</field>
         <field name="company_id" ref="base.main_company" />
     </record>
+<<<<<<< HEAD
+=======
+
+>>>>>>> [ADD] product_multi_price: New Module
 </odoo>
