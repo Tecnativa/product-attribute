@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']/group[@name='sale']" position="inside">
+                <group string="Sales metrics" name="sales_metrics">
+                    <label for="product_sold_qty_365" />
+                    <div class="o_row">
+                        <field name="product_sold_qty_365" class="oe_inline" />
+                        <field name="uom_name" class="oe_inline" readonly="1" />
+                    </div>
+                    <label for="product_sold_qty_365_monthly_mean" />
+                    <div class="o_row">
+                        <field
+                            name="product_sold_qty_365_monthly_mean"
+                            class="oe_inline"
+                        />
+                        <field name="uom_name" class="oe_inline" readonly="1" />
+                    </div>
+                    <label
+                        for="number_of_stock_days"
+                        attrs="{'invisible': [('type', '=', 'service')]}"
+                    />
+                    <div
+                        class="o_row"
+                        attrs="{'invisible': [('type', '=', 'service')]}"
+                    >
+                        <field name="number_of_stock_days" class="oe_inline" />
+                        <span>days</span>
+                    </div>
+                    <label for="minimum_recommended_qty" />
+                    <div class="o_row">
+                        <field name="minimum_recommended_qty" class="oe_inline" />
+                        <field name="uom_name" class="oe_inline" readonly="1" />
+                        <span>for</span>
+                        <field
+                            name="desired_availavility_days"
+                            class="oe_inline"
+                            readonly="1"
+                        />
+                        <span>days</span>
+                    </div>
+                    <label for="rotation_sale_mean" />
+                    <div class="o_row">
+                        <field name="rotation_sale_mean" class="oe_inline" />
+                        <span>sales</span>
+                    </div>
+                    <field name="desired_availavility_days" />
+                </group>
+            </xpath>
+        </field>
+   </record>
+   <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="product_sold_qty_365" optional="hide" />
+                <field name="product_sold_qty_365_monthly_mean" optional="hide" />
+                <field
+                    name="number_of_stock_days"
+                    optional="hide"
+                    attrs="{'invisible': [('type', '=', 'service')]}"
+                />
+                <field name="minimum_recommended_qty" optional="hide" />
+                <field name="rotation_sale_mean" optional="hide" />
+            </field>
+        </field>
+    </record>
+   <record id="action_compute_product_product_sale_metrics" model="ir.actions.server">
+        <field name="name">Compute product sale metrics</field>
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="binding_model_id" ref="product.model_product_product" />
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    records._product_sales_metrics()
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_compute_product_template_sale_metrics" model="ir.actions.server">
+        <field name="name">Compute product sale metrics</field>
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="binding_model_id" ref="product.model_product_template" />
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    records.product_variant_ids._product_sales_metrics()
+        </field>
+    </record>
+</odoo>
