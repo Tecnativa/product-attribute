@@ -8,7 +8,7 @@ from odoo.tests.common import users
 from odoo.tools import mute_logger
 
 
-class TestProductReadonlySecurity(common.SavepointCase):
+class TestProductReadonlySecurity(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
