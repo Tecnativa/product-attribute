@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="template_1" model="product.supplierinfo.import.template">
+        <field name="name">Spanish Drinks S.A.</field>
+        <field name="search_header_name">bar code</field>
+    </record>
+    <record id="template_1_line_1" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_1" />
+        <field name="header_name">Product name</field>
+        <field name="field_id" ref="product.field_product_supplierinfo__product_name" />
+    </record>
+    <record id="template_1_line_2" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_1" />
+        <field name="header_name">min qty</field>
+        <field name="field_id" ref="product.field_product_supplierinfo__min_qty" />
+    </record>
+    <record id="template_1_line_3" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_1" />
+        <field name="header_name">price</field>
+        <field name="field_id" ref="product.field_product_supplierinfo__price" />
+    </record>
+    <record id="template_1_line_4" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_1" />
+        <field name="header_name">from</field>
+    </record>
+    <record id="template_2" model="product.supplierinfo.import.template">
+        <field name="name">Olé Drinks S.A.</field>
+        <field name="search_header_name">EAN</field>
+        <field name="header_offset">1</field>
+    </record>
+    <record id="template_2_line_1" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_2" />
+        <field name="header_name">Description</field>
+        <field name="field_id" ref="product.field_product_supplierinfo__product_name" />
+    </record>
+    <record id="template_2_line_2" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_2" />
+        <field name="header_name">Ref</field>
+    </record>
+    <record id="template_2_line_3" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_2" />
+        <field name="header_name">Price</field>
+    </record>
+    <record id="template_2_line_4" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_2" />
+        <field name="header_name">Disc %</field>
+    </record>
+    <record id="template_2_line_5" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_2" />
+        <field name="header_name">Prom %</field>
+    </record>
+    <record id="template_2_line_6" model="product.supplierinfo.import.template.line">
+        <field name="template_id" ref="template_2" />
+        <field name="header_name">Final</field>
+        <field name="field_id" ref="product.field_product_supplierinfo__price" />
+    </record>
+</odoo>

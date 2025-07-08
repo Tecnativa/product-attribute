@@ -3,7 +3,7 @@
 {
     "name": "Import supplier pricelists",
     "summary": "Import supplier pricelists",
-    "version": "16.0.3.0.0",
+    "version": "18.0.1.0.0",
     "category": "Product",
     "website": "https://github.com/OCA/product-attribute",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -13,5 +13,8 @@
         "security/ir.model.access.csv",
         "views/product_supplierinfo_import_template_views.xml",
         "wizards/product_supplierinfo_import_views.xml",
+    ],
+    "demo": [
+        "demo/product_supplierinfo_import_template.xml",
     ],
 }
