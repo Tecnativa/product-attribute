@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.fields import Command
 from odoo.orm.model_classes import add_to_registry
-from odoo.tests import TransactionCase
+from odoo.tests import Form, TransactionCase
 
 
 class TestProductSecondaryUnitMixin(TransactionCase):
@@ -170,6 +170,17 @@ class TestProductSecondaryUnitMixin(TransactionCase):
         fake_model.write({"secondary_uom_qty": 4})
         self.assertEqual(fake_model.product_uom_qty, 20.0)
         self.assertEqual(fake_model.secondary_uom_qty, 4)
+
+    def test_onchange_secondary_uom_id_for_qty(self):
+        """The onchange wired to secondary_uom_id recomputes the target qty
+        field, so any consuming model gets that behavior for free without
+        having to declare it itself. Exercised through Form() so it goes
+        through the same onchange() machinery a real client would use.
+        """
+        with Form(self.secondary_unit_fake) as form:
+            form.secondary_uom_qty = 2
+            form.secondary_uom_id = self.secondary_unit_box_5
+        self.assertEqual(form.product_uom_qty, 10.0)
 
     def test_secondary_uom_qty_conversion_with_different_line_uom(self):
         product_uom_litre = self.env.ref("uom.product_uom_litre")
