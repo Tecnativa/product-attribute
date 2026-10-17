@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_product_ingredient,access_product_ingredient,product.ingredient,base.group_user,crud,
+access_product_ingredient_value,access_product_ingredient_value,product.ingredient.value,base.group_user,crud,
+access_stock_lot_ingredient_value,access_stock_lot_ingredient_value,stock.lot.ingredient.value,base.group_user,crud,

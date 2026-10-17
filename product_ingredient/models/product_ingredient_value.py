@@ -14,5 +14,5 @@ class ProductIngredientValue(models.Model):
     ingredient_id = fields.Many2one(comodel_name="product.ingredient")
     scientific_name = fields.Char(related="ingredient_id.scientific_name")
     allergen_id = fields.Many2one(related="ingredient_id.allergen_id")
-    percentage = fields.Float(digits="Product Unit of Measure")
+    percentage = fields.Float(digits="Product Unit")
     is_allergen = fields.Boolean(related="ingredient_id.is_allergen")
