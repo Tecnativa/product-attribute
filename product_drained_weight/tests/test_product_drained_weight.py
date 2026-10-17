@@ -9,6 +9,9 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestProductDrainedWeight(BaseCommon):
+    # Product administrators that see the logistics of products
+    _test_user_groups = ("base.group_system", "stock.group_stock_user")
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
