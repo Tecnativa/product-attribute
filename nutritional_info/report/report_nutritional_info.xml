@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2023 Tecnativa - Carlos Roca
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <template id="nutritional_info_table_title">
         <span>Nutrition facts (</span>
@@ -51,16 +49,9 @@
                             <t
                                 t-call="nutritional_info.nutritional_info_table_title"
                                 t-lang="lang"
-                            >
-                                <t
-                                    t-set="quantity"
-                                    t-value="alt_object.nutritional_reference_qty"
-                                />
-                                <t
-                                    t-set="uom"
-                                    t-value="alt_object.nutritional_reference_uom"
-                                />
-                            </t>
+                                quantity="alt_object.nutritional_reference_qty"
+                                uom="alt_object.nutritional_reference_uom"
+                            />
                             <span t-if="lang != langs[-1]"> / </span>
                         </t>
                     </th>
@@ -90,10 +81,11 @@
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
                     <h1 t-field="doc.display_name" />
-                    <t t-call="nutritional_info.nutritional_info_table">
-                        <t t-set="main_object" t-value="doc" />
-                        <t t-set="alt_object" t-value="doc" />
-                    </t>
+                    <t
+                        t-call="nutritional_info.nutritional_info_table"
+                        main_object="doc"
+                        alt_object="doc"
+                    />
                 </t>
             </t>
         </t>
@@ -104,9 +96,6 @@
         <field name="binding_model_id" ref="model_product_product" />
         <field name="report_type">qweb-pdf</field>
         <field
-            name="report_file"
-        >nutritional_info.product_product_nutritional_info_report</field>
-        <field
             name="report_name"
         >nutritional_info.product_product_nutritional_info_report</field>
         <field name="paperformat_id" ref="base.paperformat_euro" />
@@ -116,10 +105,11 @@
             <t t-call="web.external_layout">
                 <t t-foreach="docs.mapped('product_variant_ids')" t-as="doc">
                     <h1 t-field="doc.display_name" />
-                    <t t-call="nutritional_info.nutritional_info_table">
-                        <t t-set="main_object" t-value="doc" />
-                        <t t-set="alt_object" t-value="doc" />
-                    </t>
+                    <t
+                        t-call="nutritional_info.nutritional_info_table"
+                        main_object="doc"
+                        alt_object="doc"
+                    />
                 </t>
             </t>
         </t>
@@ -129,9 +119,6 @@
         <field name="model">product.template</field>
         <field name="binding_model_id" ref="model_product_template" />
         <field name="report_type">qweb-pdf</field>
-        <field
-            name="report_file"
-        >nutritional_info.product_template_nutritional_info_report</field>
         <field
             name="report_name"
         >nutritional_info.product_template_nutritional_info_report</field>

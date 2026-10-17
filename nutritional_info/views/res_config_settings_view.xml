@@ -21,7 +21,7 @@
                             name="%(nutritional_info.action_nutritional_type)d"
                             string="Nutritional Types"
                             class="oe_link"
-                            icon="fa-arrow-right"
+                            icon="arrow_forward"
                         />
                     </setting>
                 </block>

@@ -133,3 +133,22 @@ class TestNutritionalInfo(TransactionCase):
                     ]
                 }
             )
+
+    def test_report(self):
+        template = self.env["product.template"].create(
+            {
+                "name": "Nutrition report",
+                "nutritional_value_ids": [
+                    Command.create({"type_id": self.type_energy.id, "value": "200kcal"})
+                ],
+            }
+        )
+        html = (
+            self.env["ir.actions.report"]
+            ._render_qweb_html(
+                "nutritional_info.action_nutritional_info_template_report", template.ids
+            )[0]
+            .decode()
+        )
+        self.assertIn("Energy", html)
+        self.assertIn("200kcal", html)

@@ -3,7 +3,7 @@
 {
     "name": "Nutritional Info",
     "summary": "Nutritional information.",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Production/Stable",
     "category": "Technical Settings",
     "website": "https://github.com/OCA/product-attribute",
@@ -13,10 +13,10 @@
     "depends": ["product"],
     "data": [
         "report/report_nutritional_info.xml",
-        "security/ir.model.access.csv",
         "views/nutritional_type_view.xml",
         "views/product_views.xml",
         "views/res_config_settings_view.xml",
+        "security/ir.access.csv",
     ],
     "application": False,
     "installable": True,
