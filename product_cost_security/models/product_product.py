@@ -5,7 +5,7 @@ from odoo import fields, models
 
 class ProductProduct(models.Model):
     _name = "product.product"
-    _inherit = ["product.product", "product.cost.security.mixin"]
+    _inherit = ("product.product", "product.cost.security.mixin")
 
     # Inherited fields
     standard_price = fields.Float(groups="product_cost_security.group_product_cost")

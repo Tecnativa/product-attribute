@@ -10,6 +10,9 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestProductCostSecurity(BaseCommon):
+    # An administrator without the product cost groups
+    _test_user_groups = ("base.group_system",)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -18,7 +21,8 @@ class TestProductCostSecurity(BaseCommon):
         # Without this flag in the context,
         # the system tries to access stock.move, which the user may not have permission.
         cls.env = cls.env(context=dict(cls.env.context, disable_auto_svl=True))
-        cls.base_group_user_id = cls.env.ref("base.group_user").id
+        # Only administrators create products when just product is installed
+        cls.admin_group_id = cls.env.ref("base.group_system").id
         cls.product_edit_cost_group_id = cls.env.ref(
             "product_cost_security.group_product_edit_cost"
         ).id
@@ -26,9 +30,6 @@ class TestProductCostSecurity(BaseCommon):
             "product_cost_security.group_product_cost"
         ).id
         cls.product_template_model = cls.env["product.template"]
-        cls.env.user.write(
-            {"group_ids": [Command.set(cls.env.ref("base.group_system").ids)]}
-        )
 
     def test_without_access_to_product_costs_group(self):
         sheet_form = Form(self.product_template_model.with_user(self.env.user))
@@ -43,7 +44,7 @@ class TestProductCostSecurity(BaseCommon):
 
     def test_with_access_to_product_costs_group(self):
         self.env.user.group_ids = [
-            Command.set([self.product_cost_group_id, self.base_group_user_id])
+            Command.set([self.product_cost_group_id, self.admin_group_id])
         ]
         sheet_form = Form(self.product_template_model.with_user(self.env.user))
         sheet_form.name = "Test Product"
@@ -65,7 +66,7 @@ class TestProductCostSecurity(BaseCommon):
 
     def test_with_access_to_modify_product_costs_group(self):
         self.env.user.group_ids = [
-            Command.set([self.product_edit_cost_group_id, self.base_group_user_id])
+            Command.set([self.product_edit_cost_group_id, self.admin_group_id])
         ]
         sheet_form = Form(self.product_template_model.with_user(self.env.user))
         sheet_form.name = "Test Product"

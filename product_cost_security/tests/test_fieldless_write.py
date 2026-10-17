@@ -44,8 +44,7 @@ class TestFieldlessWrite(BaseCommon):
             template.write({"name": "Renamed Product"})
         except AccessError as error:
             self.fail(
-                "A field-less write was wrongly denied to a non cost-editor: "
-                f"{error}"
+                f"A field-less write was wrongly denied to a non cost-editor: {error}"
             )
 
     def test_delegated_write_without_edit_group(self):
