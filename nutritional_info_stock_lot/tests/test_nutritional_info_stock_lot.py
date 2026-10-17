@@ -7,6 +7,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestNutritionalInfoStockLot(BaseCommon):
+    _test_user_groups = ("stock.group_stock_user", "stock.group_production_lot")
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

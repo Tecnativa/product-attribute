@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_nutritional_value_lot_employee,access_nutritional_value_lot_employee,nutritional.value.lot,base.group_user,r,
+access_nutritional_value_lot_manager,access_nutritional_value_lot_manager,nutritional.value.lot,base.group_system,crud,
+access_nutritional_value_lot_stock,access_nutritional_value_lot_stock,nutritional.value.lot,stock.group_stock_user,crud,
+access_nutritional_type_manager,access_nutritional_type_manager,nutritional.type,stock.group_stock_user,crud,
+access_nutritional_value_manager,access_nutritional_value_manager,nutritional.value,stock.group_stock_user,crud,
