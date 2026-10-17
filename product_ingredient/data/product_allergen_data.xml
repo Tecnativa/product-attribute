@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- This file is preloaded with pre_init_hook. Use other file if is needed -->
 <odoo noupdate="1">
     <record id="product_allergen_attribute" model="product.attribute">
