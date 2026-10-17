@@ -1,5 +1,7 @@
 # Copyright 2021 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from typing import ClassVar
+
 from odoo import api, fields, models
 
 
@@ -7,7 +9,7 @@ class SecondaryUnitFake(models.Model):
     _name = "secondary.unit.fake"
     _inherit = "product.secondary.unit.mixin"
     _description = "Secondary unit fake model for tests"
-    _secondary_unit_fields = {
+    _secondary_unit_fields: ClassVar[dict] = {
         "qty_field": "product_uom_qty",
         "uom_field": "product_uom_id",
     }

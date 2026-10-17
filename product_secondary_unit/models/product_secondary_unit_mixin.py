@@ -1,7 +1,8 @@
 # Copyright 2021 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from typing import ClassVar
+
 from odoo import api, fields, models
-from odoo.tools.float_utils import float_round
 
 
 class ProductSecondaryUnitMixin(models.AbstractModel):
@@ -12,7 +13,7 @@ class ProductSecondaryUnitMixin(models.AbstractModel):
     as class variable with the following content:
     _secondary_unit_fields = {
         "qty_field": "product_uom_qty",
-        "uom_field": "product_uom"
+        "uom_field": "uom_id"
     }
 
     To compute ``qty_field`` on target model, you must convert the field to computed
@@ -36,7 +37,7 @@ class ProductSecondaryUnitMixin(models.AbstractModel):
 
     _name = "product.secondary.unit.mixin"
     _description = "Product Secondary Unit Mixin"
-    _secondary_unit_fields = {}
+    _secondary_unit_fields: ClassVar[dict] = {}
     _product_uom_field = "uom_id"
 
     @api.model
@@ -45,7 +46,7 @@ class ProductSecondaryUnitMixin(models.AbstractModel):
 
     secondary_uom_qty = fields.Float(
         string="Secondary Qty",
-        digits="Product Unit of Measure",
+        digits="Product Unit",
         store=True,
         readonly=False,
         compute="_compute_secondary_uom_qty",
@@ -61,7 +62,7 @@ class ProductSecondaryUnitMixin(models.AbstractModel):
     def _get_uom_line(self):
         return self[self._secondary_unit_fields["uom_field"]]
 
-    def _get_product_uom(self):
+    def _get_secondary_unit_product_uom(self):
         """Return the UoM the secondary unit factor refers to.
 
         Models where ``product_id`` is optional (a bill of materials defined at
@@ -94,12 +95,11 @@ class ProductSecondaryUnitMixin(models.AbstractModel):
         # Intended to be called from other operations if needed.
         self.ensure_one()
         uom_line = self._get_uom_line()
-        uom_product = self._get_product_uom()
+        uom_product = self._get_secondary_unit_product_uom()
         if uom_line != uom_product:
             qty = uom_line._compute_quantity(qty, uom_product)
-        return float_round(
-            qty / (self.secondary_uom_id.factor or 1.0),
-            precision_rounding=self.secondary_uom_id.uom_id.rounding,
+        return self.secondary_uom_id.uom_id.round(
+            qty / (self.secondary_uom_id.factor or 1.0)
         )
 
     @api.depends(lambda x: x._get_secondary_uom_qty_depends())
@@ -159,7 +159,7 @@ class ProductSecondaryUnitMixin(models.AbstractModel):
             )
             qty_base = rec.secondary_uom_qty * rec.secondary_uom_id.factor
             uom_line = rec._get_uom_line()
-            uom_product = rec._get_product_uom()
+            uom_product = rec._get_secondary_unit_product_uom()
             qty_line = uom_product._compute_quantity(qty_base, uom_line)
             rec[rec._secondary_unit_fields["qty_field"]] = qty_line
 

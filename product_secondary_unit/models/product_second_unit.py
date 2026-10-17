@@ -1,13 +1,12 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.tools.float_utils import float_round
 
 
 class ProductSecondaryUnit(models.Model):
     _name = "product.secondary.unit"
     _description = "Product Secondary Unit"
-    _rec_names_search = ["name", "code"]
+    _rec_names_search = ("name", "code")
 
     name = fields.Char(required=True, translate=True)
     code = fields.Char()
@@ -64,6 +63,4 @@ class ProductSecondaryUnit(models.Model):
         )
         if uom != uom_product:
             qty = uom._compute_quantity(qty, uom_product)
-        return float_round(
-            qty / (self.factor or 1.0), precision_rounding=self.uom_id.rounding
-        )
+        return self.uom_id.round(qty / (self.factor or 1.0))
